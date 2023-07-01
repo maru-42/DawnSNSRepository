@@ -9,13 +9,11 @@
 {!! Form::close() !!}
 
 <table class='table table-hover'>
-  <tr>
-    <th>投稿内容</th>
-    <th>投稿日時</th>
-  </tr>
   <!-- postscontrollerから送られてきたpostsという名前で送られた、DBから取り出した呟きs['posts'=>$postsList]を、foreachで取り出して、その一つ一つの呟きを$postという名前で使っていく -->
   @foreach ($posts as $post)
   <tr>
+    <td><img src="{{ asset('/images/'.$post->images)}}"></td>
+    <td>{{ $post->username}}</td>
     <td>{{ $post->posts }}</td>
     <td>{{ $post->created_at }}</td>
   </tr>
