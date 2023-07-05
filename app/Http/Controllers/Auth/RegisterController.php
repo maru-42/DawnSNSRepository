@@ -48,11 +48,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // dd('welcome validation');ここまできてること確認済み
         return Validator::make($data, [
-            'username' => 'required|string|max:255',
-            'mail' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:4|confirmed',
-        ]);
+            // 詳細設計書に従って、validation項目を追加
+            'username' => 'required|string|min:4|max:12',
+            'mail' => 'required|string|email|min:4|max:255|unique:users',
+            'password' => 'required|string|min:4|max:12',
+            'password-confsirm' => 'required|string|min:4|max:12|same:password',
+        ])->validate();
     }
 
     /**
@@ -78,8 +81,11 @@ class RegisterController extends Controller
     public function register(Request $request){
         if($request->isMethod('post')){
             $data = $request->input();
-
+            // バリデーションするために追加
+            $this->validator($data);
+            // dd($data);と書くと、()の中のものが画面に表示されるので、どこまで通れているのか確認しやすい
             $this->create($data);
+
             return redirect('added');
         }
         return view('auth.register');
