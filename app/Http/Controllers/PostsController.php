@@ -11,7 +11,11 @@ use DateTime;
 
 class PostsController extends Controller
 {
-    //
+    //2.6	ログイン中のみ閲覧可能なページの設定のために記述
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         $postsList = DB::table('posts')
             //投稿を表示したいのですが、postsテーブルには投稿内容しか保存されておりません。なので、画像とユーザー名を取ってくるためにはUsersテーブルとも結合させないといけません。
