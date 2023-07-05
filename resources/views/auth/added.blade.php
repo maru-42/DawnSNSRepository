@@ -3,8 +3,7 @@
 @section('content')
 
 <div id="clear">
-  <!-- ここにログインした人のusernameを持ってきたい -->
-  <p><?php echo $username; ?>さん、</p>
+  <p>{{ Auth::user()->username}}さん、</p>
   <p>ようこそ！DAWNSNSへ！</p>
   <p>ユーザー登録が完了しました。</p>
   <p>さっそく、ログインをしてみましょう。</p>

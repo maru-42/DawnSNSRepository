@@ -11,17 +11,19 @@
 |
 */
 
+// 2.6	ログイン中のみ閲覧可能なページの設定のために記述
+// ここがわからない、今はまだ無理なところ？
 // Route::get('/', function () {
-//     return view('welcome');
+//     return view('/index');
 // });
-// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')
 
-//Auth::routes();
+// Auth::routes();
 
 
 //ログアウト中のページ
-Route::get('/login', 'Auth\LoginController@login');
-Route::post('/login', 'Auth\LoginController@login');
+Route::get('/login', 'Auth\LoginController@login')->name('login');
+Route::post('/login', 'Auth\LoginController@login')->name('login');
 
 Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
@@ -35,7 +37,7 @@ Route::post('/top','PostsController@create');
 
 Route::get('/profile','UsersController@profile');
 
-Route::get('/search','UsersController@index');
+Route::get('/search','UsersController@search');
 
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
