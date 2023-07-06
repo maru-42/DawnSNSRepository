@@ -12,10 +12,10 @@ class FollowsController extends Controller
     //
     public function followList(){
         // select images from usersだけど、取ってきたいのはログインしているユーザーがfollowしているユーザーのimagesだから、usersテーブルとfollowsテーブルを結合する必要がある？
-        // select * from users where カラム名 = 値(今回の場合はログインユーザー)みたいな感じで、followId＝ログインユーザーのfollowerの情報を持ってきたい
+        // select * from users where カラム名 = 値(今回の場合はログインユーザー)みたいな感じで、followerId＝ログインユーザーのfollowの情報を持ってきたい
         $followList = DB::table('users')
-            ->join('follows','users.id','=','follows.follower')
-            ->where('follows.follow',Auth::id())
+            ->join('follows','users.id','=','follows.follow')
+            ->where('follows.follower',Auth::id())
             ->select('users.images as images')
             ->get();
 
