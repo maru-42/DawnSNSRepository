@@ -11,11 +11,12 @@
       @csrf
       <input type="text" placeholder="ユーザー名" name="search" value="@if (isset($search)) {{ $search }} @endif">
       <input type="submit"></input>
-      <!-- もしurlがresultになったらuserscontrollerから$wordを取ってきたい -->
     </form>
   </div>
   <div class="">
-    <p>検索ワード:{{ $word }}</p>
+    @if(isset($word))
+    <p class="">検索ワード:{{ $word }}</p>
+    @endif
   </div>
 </div>
 <table class='table table-hover'>
@@ -24,6 +25,11 @@
   <tr>
     <td><img src="{{ asset('/images/'.$user->images)}}"></td>
     <td>{{ $user->username}}</td>
+    @if($followNumbers->contains($user->id))
+    <td><a href="unFollowed/{{ $user->id}}">フォローをはずす</a></td>
+    @else
+    <td><a href="followed/{{ $user->id}}">フォローする</a></td>
+    @endif
   </tr>
   @endforeach
 </table>
