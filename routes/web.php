@@ -39,5 +39,7 @@ Route::get('/profile','UsersController@profile');
 
 Route::get('/search','UsersController@search');
 
+Route::get('/result','UsersController@result');
+
 Route::get('/follow-list','FollowsController@followList');
 Route::get('/follower-list','FollowsController@followerList');
