@@ -13,13 +13,27 @@ class FollowsController extends Controller
     public function followList(){
         // select images from usersだけど、取ってきたいのはログインしているユーザーがfollowしているユーザーのimagesだから、usersテーブルとfollowsテーブルを結合する必要がある？
         // select * from users where カラム名 = 値(今回の場合はログインユーザー)みたいな感じで、followerId＝ログインユーザーのfollowの情報を持ってきたい
-        $followList = DB::table('users')
+        $followImageList = DB::table('users')
             ->join('follows','users.id','=','follows.follow')
             ->where('follows.follower',Auth::id())
             ->select('users.images as images')
             ->get();
 
-        return view('follows.followList',['follows'=>$followList]);
+        // select * from users join posts on users.id = posts.user_id
+        // join follows on users.id = follows.follow
+        // where follows.follower = Auth::id()
+        // orderBy('posts.created_at','desc')
+        $followPostList = DB::table('users')
+            ->join('posts','users.id','=','posts.user_id')
+            ->join('follows','users.id','=','follows.follow')
+            ->where('follows.follower',Auth::id())
+            ->whereNotIn('users.id',[Auth::id()])
+            ->orderBy('posts.created_at','desc')
+            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at')
+            ->get();
+
+        return view('follows.followList',['followImages'=>$followImageList,
+        'followPosts'=>$followPostList]);
     }
     public function followerList(){
         return view('follows.followerList');
