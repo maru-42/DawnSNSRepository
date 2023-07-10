@@ -22,6 +22,8 @@ class UsersController extends Controller
 
         // select username image from users
         $usersList = DB::table('users')
+        // 自分をユーザー一覧に表示しないために記述
+            ->whereNotIn('id',[Auth::id()])
             ->select('id', 'images','username')
             ->get();
 
@@ -37,6 +39,8 @@ class UsersController extends Controller
         $word = $_GET['search'];
         $usersList = DB::table('users')
             ->where('username','like','%'.$word.'%')
+            // 自分をユーザー一覧に表示しないために記述
+            ->whereNotIn('id',[Auth::id()])
             ->select('id','images','username')
             ->get();
         // dd($usersList);
