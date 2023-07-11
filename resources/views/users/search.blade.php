@@ -23,7 +23,7 @@
   <!-- userscontrollerから送られてきたusersという名前で送られた、DBから取り出した情報['users'=>$usersList]を、foreachで取り出して、その一つ一つの呟きを$userという名前で使っていく -->
   @foreach ($users as $user)
   <tr>
-    <td><img src="{{ asset('/images/'.$user->images)}}"></td>
+    <td><a href="/profile"><img src="{{ asset('/images/'.$user->images)}}"></a></td>
     <td>{{ $user->username}}</td>
     @if($followNumbers->contains($user->id))
     <td><a href="unFollowed/{{ $user->id}}">フォローをはずす</a></td>
