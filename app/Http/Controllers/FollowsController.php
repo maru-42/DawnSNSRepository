@@ -36,6 +36,22 @@ class FollowsController extends Controller
         'followPosts'=>$followPostList]);
     }
     public function followerList(){
-        return view('follows.followerList');
+        $followerImageList = DB::table('users')
+            ->join('follows','users.id','=','follows.follower')
+            ->where('follows.follow',Auth::id())
+            ->select('users.images as images')
+            ->get();
+
+            $followerPostList = DB::table('users')
+            ->join('posts','users.id','=','posts.user_id')
+            ->join('follows','users.id','=','follows.follower')
+            ->where('follows.follow',Auth::id())
+            ->whereNotIn('users.id',[Auth::id()])
+            ->orderBy('posts.created_at','desc')
+            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at')
+            ->get();
+
+        return view('follows.followerList',['followerImages'=>$followerImageList,
+        'followerPosts'=>$followerPostList]);
     }
 }
