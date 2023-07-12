@@ -23,7 +23,7 @@ class PostsController extends Controller
             ->where('follows.follower',Auth::id())
             ->orWhere('posts.user_id',Auth::id())
             ->orderBy('posts.created_at','desc')
-            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at')
+            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at','users.id as id')
             ->get();
 
 

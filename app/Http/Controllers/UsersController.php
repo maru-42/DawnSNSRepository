@@ -11,7 +11,7 @@ use Auth;
 class UsersController extends Controller
 {
     //
-    public function profile(){
+    public function profile($userId){
         return view('users.profile');
     }
 

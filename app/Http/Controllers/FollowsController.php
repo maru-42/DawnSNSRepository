@@ -16,7 +16,7 @@ class FollowsController extends Controller
         $followImageList = DB::table('users')
             ->join('follows','users.id','=','follows.follow')
             ->where('follows.follower',Auth::id())
-            ->select('users.images as images')
+            ->select('users.images as images','users.id as id')
             ->get();
 
         // select * from users join posts on users.id = posts.user_id
@@ -29,7 +29,7 @@ class FollowsController extends Controller
             ->where('follows.follower',Auth::id())
             ->whereNotIn('users.id',[Auth::id()])
             ->orderBy('posts.created_at','desc')
-            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at')
+            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at','users.id as id')
             ->get();
 
         return view('follows.followList',['followImages'=>$followImageList,
@@ -39,7 +39,7 @@ class FollowsController extends Controller
         $followerImageList = DB::table('users')
             ->join('follows','users.id','=','follows.follower')
             ->where('follows.follow',Auth::id())
-            ->select('users.images as images')
+            ->select('users.images as images','users.id as id')
             ->get();
 
             $followerPostList = DB::table('users')
@@ -48,7 +48,7 @@ class FollowsController extends Controller
             ->where('follows.follow',Auth::id())
             ->whereNotIn('users.id',[Auth::id()])
             ->orderBy('posts.created_at','desc')
-            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at')
+            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at','users.id as id')
             ->get();
 
         return view('follows.followerList',['followerImages'=>$followerImageList,
