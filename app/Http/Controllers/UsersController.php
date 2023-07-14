@@ -12,7 +12,10 @@ class UsersController extends Controller
 {
     //
     public function profile($userId){
-        return view('users.profile');
+        $profile = DB::table('users')
+            ->find($userId);
+        return view('users.profile',
+        ['profile'=>$profile]);
     }
 
     public function search(){
