@@ -11,6 +11,14 @@ use Auth;
 class UsersController extends Controller
 {
     //
+    public function profile(){
+        $profile = DB::table('users')
+            ->find($userId);
+        return view('users.profile',
+        ['profile'=>$profile]);
+    }
+
+
     public function profile($userId){
         $profile = DB::table('users')
             ->find($userId);

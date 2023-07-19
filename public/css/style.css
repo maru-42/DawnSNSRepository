@@ -1,22 +1,101 @@
 @charset "utf-8";
-html{
-}
-body{
-}
+
+html {}
+
+body {}
+
 /* header */
-header{
-    background:#3C4767;
+header {
+    background: #3C4767;
 }
 
+#head {
+    display: flex;
+    align-items: center;
+}
+
+h1 {
+    flex-basis: 80%;
+    position: relative;
+}
+
+#login-user {
+    position: absolute;
+    display: block;
+    justify-content: end;
+    /* borderで左としたの線を作って、45度傾けたら下向きの矢印になる */
+}
+
+/* .bar {
+    display: block;
+    justify-content: space-between;
+    cursor: pointer;
+} */
+
+.bar {
+    content: "";
+    margin: auto;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 2px;
+    width: 13px;
+    height: 13px;
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.bar:checked {
+    content: "";
+    margin: auto;
+    /* position: relative; */
+    top: 0;
+    bottom: 0;
+    left: 2px;
+    width: 13px;
+    height: 13px;
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+    transform: rotate(-135deg);
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.item {
+    display: none;
+    background-color: aqua;
+    height: 15px;
+}
+
+/* .item {
+    list-style: none;
+    display: block;
+    visibility: hidden;
+    transform-origin: top;
+    opacity: 0;
+    transition: .3s;
+}
+
+.drop-menu.active {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1, 1);
+} */
+
+
 /* main content */
-#row{
+#row {
     display: flex;
     flex-flow: row wrap;
 }
-#container{
+
+#container {
     flex: 0 0 80%;
 }
-#side-bar{
+
+#side-bar {
     flex: 0 0 19%;
     border-left: 1px solid #6C6C6C;
 }

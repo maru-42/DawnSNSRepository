@@ -23,17 +23,17 @@
   <header>
     <div id="head">
       <h1><a href="/top"><img src="images/main_logo.png"></a></h1>
-      <div id="">
-        <div id="">
-          <p>{{ Auth::user()->username}}さん<img src="images/dawn.png"></p>
-          <div>
-            <ul>
-              <li><a href="/top">ホーム</a></li>
-              <li><a href="/profile">プロフィール</a></li>
-              <li><a href="/logout">ログアウト</a></li>
-            </ul>
-          </div>
-        </div>
+      <div id="login-user menu">
+        <p>{{ Auth::user()->username}}さん</p>
+        <div class="drop-menu bar"></div>
+        <ul>
+          <li class="drop-menu item"><a href="/top">ホーム</a></li>
+          <li class="drop-menu item"><a href="/profile">プロフィール</a></li>
+          <li class="drop-menu item"><a href="/logout">ログアウト</a></li>
+        </ul>
+      </div>
+      <img src="images/dawn.png">
+    </div>
   </header>
   <div id="row">
     <div id="container">
@@ -58,7 +58,7 @@
   </div>
   <footer>
   </footer>
-  <script src="{{ asset('/JavaScriptファイルのURL') }}"></script>
-  <script src="{{ asset('/JavaScriptファイルのURL') }}"></script>
+  <script src="{{ asset('https://code.jquery.com/jquery-3.5.1.min.js') }}"></script>
+  <script src="{{ asset('/js/script.js') }}"></script>
 </body>
 </html>
