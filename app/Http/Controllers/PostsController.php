@@ -46,4 +46,11 @@ class PostsController extends Controller
 
         return redirect('/top');
     }
+
+    public function profile(){
+        $profile = DB::table('users')
+            ->find(Auth::id());
+        return view('posts.profile',
+        ['profile'=>$profile]);
+    }
 }
