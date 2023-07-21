@@ -47,7 +47,7 @@ h1 {
     cursor: pointer;
 }
 
-.bar:checked {
+.bar.open {
     content: "";
     margin: auto;
     /* position: relative; */
