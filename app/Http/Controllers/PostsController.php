@@ -26,15 +26,7 @@ class PostsController extends Controller
             ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at','users.id as id')
             ->get();
 
-        $followCount = DB::table('follows')
-            ->where('follower',Auth::id())
-            ->count();
-
-        $followerCount = DB::table('follows')
-            ->where('follow',Auth::id())
-            ->count();
-
-        return view('posts.index',['posts'=>$postsList,'followCount'=>$followCount,'followerCount'=>$followerCount]);
+        return view('posts.index',['posts'=>$postsList]);
     }
 
      public function create(Request $request)

@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
+use Auth;
+use Illuminate\Database\Eloquent\Model;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,35 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer('*', function ($view)
+        {
+            $userInfo = AppServiceProvider::GetUserInfo();
+            $view->with('userInfo',$userInfo);
+        });
     }
+
+    /**
+     * サイドバーに表示するユーザー情報取得
+     */
+    private function GetUserInfo(){
+
+
+        $userInfo = new UserInfo();
+
+        // フォロー数
+        $userInfo->followCount = DB::table('follows')
+            ->where('follower',Auth::id())
+            ->count();
+
+        // フォロワー数
+        $userInfo->followerCount = DB::table('follows')
+            ->where('follow',Auth::id())
+            ->count();
+        return $userInfo;
+    }
+}
+
+class UserInfo{
+    public $followCount;
+    public $followerCount;
 }
