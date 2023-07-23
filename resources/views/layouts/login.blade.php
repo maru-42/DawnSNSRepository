@@ -22,7 +22,7 @@
 <body>
   <header>
     <div id="head">
-      <h1><a href="/top"><img src="images/main_logo.png"></a></h1>
+      <h1><a href="/top"><img src="{{ asset('images/main_logo.png') }}"></a></h1>
       <div id="login-user menu">
         <p>{{ Auth::user()->username}}さん</p>
         <div class="drop-menu bar"></div>
@@ -32,7 +32,7 @@
           <li class="drop-menu item"><a href="/logout">ログアウト</a></li>
         </ul>
       </div>
-      <img src="images/dawn.png">
+      <img src="{{ asset('images/dawn.png') }}">
     </div>
   </header>
   <div id="row">
