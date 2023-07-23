@@ -12,6 +12,11 @@
     <td></td>
     <th>Bio</th>
     <td>{{ $profile->bio }}</td>
+    @if($followNumbers->contains($profile->id))
+    <td><a href="unFollowed/{{ $profile->id}}">フォローをはずす</a></td>
+    @else
+    <td><a href="followed/{{ $profile->id}}">フォローする</a></td>
+    @endif
   </tr>
 </table>
 

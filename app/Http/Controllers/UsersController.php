@@ -12,10 +12,14 @@ class UsersController extends Controller
 {
     //
     public function profile($userId){
+        $followNumbers = DB::table('follows')
+            ->where('follower',Auth::id())
+            ->pluck('follow');
+
         $profile = DB::table('users')
             ->find($userId);
         return view('users.profile',
-        ['profile'=>$profile]);
+        ['followNumbers'=>$followNumbers,'profile'=>$profile]);
     }
 
     public function search(){

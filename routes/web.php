@@ -46,8 +46,10 @@ Route::get('/search','UsersController@search');
 Route::get('/result','UsersController@result');
 
 Route::get('/followed/{userId}','UsersController@followed');
-
 Route::get('/unFollowed/{userId}','UsersController@unFollowed');
+
+Route::get('profile/followed/{userId}','UsersController@followed');
+Route::get('profile/unFollowed/{userId}','UsersController@unFollowed');
 
 Route::get('/follow-list','FollowsController@followList');
 Route::get('/follower-list','FollowsController@followerList');
