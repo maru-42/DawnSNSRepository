@@ -55,7 +55,14 @@ class RegisterController extends Controller
             'mail' => 'required|string|email|min:4|max:255|unique:users',
             'password' => 'required|string|min:4|max:12',
             'password-confsirm' => 'required|string|min:4|max:12|same:password',
-        ])->validate();
+        ]
+        // [
+        // 'username.required'=>'必須項目です',
+        // 'username.string'=>'文字列を記入してください',
+        // 'username.min'=>'4文字以上で入力してください',
+        // 'username.max'=>'12文字以下で入力してください'
+        // ]
+        )->validate();
     }
 
     /**
@@ -82,8 +89,13 @@ class RegisterController extends Controller
         if($request->isMethod('post')){
             $data = $request->input();
             // バリデーションするために追加
-            $this->validator($data);
-            // dd($data);と書くと、()の中のものが画面に表示されるので、どこまで通れているのか確認しやすい
+            $validator = $this->validator($data);
+
+            if ($validator->fails()){
+                return redirect('added')
+                ->withErrors($validator)
+                ->withInput();
+            }
             $this->create($data);
 
             return redirect('added');

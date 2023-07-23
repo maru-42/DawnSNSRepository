@@ -10,6 +10,16 @@
   {!! Form::open() !!}
   {{ Form::token()}}
 
+  @if ($errors->any())
+  <div class="error" style="color:red">
+    <ul>
+      @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+  @endif
+
   <div class="form-group row">
     {{Form::label('inputName','UserName')}}
     <div class="">

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use Illuminate\Support\Facades\Validator;
+
 
 
 
@@ -51,5 +53,31 @@ class PostsController extends Controller
             ->find(Auth::id());
         return view('posts.profile',
         ['profile'=>$profile]);
+    }
+
+     public function update(Request $request){
+            $data = $request->input();
+            // バリデーションするために追加
+            $validator = $this->validator($data);
+
+            if ($validator->fails()){
+                return redirect('profile')
+                ->withErrors($validator)
+                ->withInput();
+            }
+            // $this->update($data);
+
+            return redirect('profile');
+        }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'username' => 'required|string|min:4|max:12',
+            'mail' => 'required|string|email|min:4|max:255|unique:users',
+            'new password' => 'alpha_num|min:4|max:12|unique:users|',
+            'bio' => 'max:200',
+            'icon image' => 'alpha_num|image'
+        ])->validate();
     }
 }
