@@ -20,5 +20,16 @@
   </tr>
 </table>
 
+<table class='table table-hover'>
+  @foreach ($posts as $post)
+  <tr>
+    <td><a href="/profile/{{ $post->id}}"><img src="{{ asset('/images/'.$post->images)}}"></a></td>
+    <td>{{ $post->username}}</td>
+    <td>{{ $post->posts }}</td>
+    <td>{{ $post->created_at }}</td>
+  </tr>
+  @endforeach
+</table>
+
 
 @endsection

@@ -18,8 +18,16 @@ class UsersController extends Controller
 
         $profile = DB::table('users')
             ->find($userId);
+
+        $postsList = DB::table('users')
+            ->join('posts','users.id','=','posts.user_id')
+            ->where('posts.user_id',$userId)
+            ->orderBy('posts.created_at','desc')
+            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at','users.id as id')
+            ->get();
+
         return view('users.profile',
-        ['followNumbers'=>$followNumbers,'profile'=>$profile]);
+        ['followNumbers'=>$followNumbers,'profile'=>$profile,'posts'=>$postsList]);
     }
 
     public function search(){
