@@ -21,44 +21,44 @@
   @endif
 
   <div class="form-group row">
-    {{Form::label('inputName','UserName')}}
+    {{Form::label('username','UserName')}}
     <div class="">
-      {{Form::text('inputName', $profile->username, ['class'=>'form-control', 'id'=>'inputName', 'placeholder'=>'UserName'])}}
+      {{Form::text('username', $profile->username, ['class'=>'form-control', 'id'=>'username', 'placeholder'=>'UserName'])}}
     </div>
   </div>
 
   <div class="form-group row">
-    {{Form::label('inputEmail','MailAdress')}}
+    {{Form::label('mail','MailAdress')}}
     <div class="">
-      {{Form::email('inputEmail', $profile->mail, ['class'=>'form-control', 'id'=>'inputEmail', 'placeholder'=>'MailAdress'])}}
+      {{Form::email('mail', $profile->mail, ['class'=>'form-control', 'id'=>'mail', 'placeholder'=>'MailAdress'])}}
     </div>
   </div>
 
   <div class="form-group row">
-    {{Form::label('inputPassword','Password')}}
+    {{Form::label('oldPassword','Password')}}
     <div class="">
-      {{Form::password('inputPassword', ['class'=>'form-control', 'id'=>'inputPassword','readonly', 'placeholder'=>'●●●●●●'])}}
+      {{Form::password('oldPassword', ['class'=>'form-control', 'id'=>'oldPassword','readonly', 'placeholder'=>'●●●●●●'])}}
     </div>
   </div>
 
   <div class="form-group row">
-    {{Form::label('inputPassword','new Password')}}
+    {{Form::label('password','new Password')}}
     <div class="">
-      {{Form::password('inputPassword', ['class'=>'form-control', 'id'=>'inputPassword', 'placeholder'=>'new Password'])}}
+      {{Form::password('password', ['class'=>'form-control', 'id'=>'password', 'placeholder'=>'new Password'])}}
     </div>
   </div>
 
   <div class="form-group row">
-    {{Form::label('inputBio','Bio')}}
+    {{Form::label('bio','Bio')}}
     <div class="">
-      {{Form::textarea('inputBio', $profile->bio,['class'=>'form-control', 'id'=>'inputBio', 'placeholder'=>'Bio'])}}
+      {{Form::textarea('bio', $profile->bio,['class'=>'form-control', 'id'=>'bio', 'placeholder'=>'Bio'])}}
     </div>
   </div>
 
   <div class="form-group row">
-    {{Form::file('image', ['class'=>'custom-file-input', 'id'=>'fileimage'])}}
+    {{Form::file('images', ['class'=>'custom-file-input', 'id'=>'images'])}}
     <div class="">
-      {{Form::label('image', 'ファイルを選択', ['class'=>'custom-file-label'])}}
+      {{Form::label('images', 'ファイルを選択', ['class'=>'custom-file-label'])}}
     </div>
   </div>
 

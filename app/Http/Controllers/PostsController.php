@@ -57,15 +57,28 @@ class PostsController extends Controller
 
      public function update(Request $request){
             $data = $request->input();
+
+            // dd($data);
+
             // バリデーションするために追加
             $validator = $this->validator($data);
 
-            if ($validator->fails()){
-                return redirect('profile')
-                ->withErrors($validator)
-                ->withInput();
-            }
-            // $this->update($data);
+            // if ($validator->fails()){
+            //     return redirect('profile')
+            //     ->withErrors($validator)
+            //     ->withInput();
+            // }
+
+            DB::table('users')
+            ->where('id',Auth::id())
+            ->update(
+                ['username'=> $request->username,
+                'mail'=> $request->mail,
+                'password'=> $request->password,
+                'bio'=> $request->bio,
+                'images'=> $request->images,
+                'updated_at'=> new DateTime()]
+            );
 
             return redirect('profile');
         }
@@ -74,10 +87,10 @@ class PostsController extends Controller
     {
         return Validator::make($data, [
             'username' => 'required|string|min:4|max:12',
-            'mail' => 'required|string|email|min:4|max:255|unique:users',
-            'new password' => 'alpha_num|min:4|max:12|unique:users|',
+            'mail' => 'required|string|email|min:4|max:255',
+            'password' => 'alpha_num|min:4|max:12|unique:users|',
             'bio' => 'max:200',
-            'icon image' => 'alpha_num|image'
+            // 'images' => 'image'
         ])->validate();
     }
 }
