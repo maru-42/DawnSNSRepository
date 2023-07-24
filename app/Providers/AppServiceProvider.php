@@ -54,7 +54,9 @@ class AppServiceProvider extends ServiceProvider
 
         $user= DB::table('users')
             ->find(Auth::id());
-        $userInfo->images = $user->images;
+        if($user!=null && $user->images!=null){
+            $userInfo->images = $user->images;
+        }
 
         return $userInfo;
     }
