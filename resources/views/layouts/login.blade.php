@@ -32,7 +32,7 @@
           <li class="drop-menu item"><a href="/logout">ログアウト</a></li>
         </ul>
       </div>
-      <img src="{{ asset('images/dawn.png') }}">
+      <img src="{{ asset('/images/'.$userInfo->images) }}">
     </div>
   </header>
   <div id="row">

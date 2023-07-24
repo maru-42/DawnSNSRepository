@@ -61,7 +61,7 @@ class PostsController extends Controller
             // dd($data);
 
             // バリデーションするために追加
-            $validator = $this->validator($data);
+            // $validator = $this->validator($data);
 
             // if ($validator->fails()){
             //     return redirect('profile')
@@ -69,14 +69,22 @@ class PostsController extends Controller
             //     ->withInput();
             // }
 
+
+            // アップロードされたファイル名取得
+            $filename = $request->file("images")->getClientOriginalName();
+
+            // ファイル保存
+            $request->images->storeAs('images',$filename,'public_uploads');
+
+
             DB::table('users')
             ->where('id',Auth::id())
             ->update(
                 ['username'=> $request->username,
                 'mail'=> $request->mail,
-                'password'=> $request->password,
+                'password'=> bcrypt($request->password),
                 'bio'=> $request->bio,
-                'images'=> $request->images,
+                'images'=> $filename,
                 'updated_at'=> new DateTime()]
             );
 
@@ -88,9 +96,9 @@ class PostsController extends Controller
         return Validator::make($data, [
             'username' => 'required|string|min:4|max:12',
             'mail' => 'required|string|email|min:4|max:255',
-            'password' => 'alpha_num|min:4|max:12|unique:users|',
+            'password' => 'alpha_num|min:4|max:12|unique:users',
             'bio' => 'max:200',
-            // 'images' => 'image'
+            'images' => 'file|image|mines:jpg,png,bmp,gif,svg'
         ])->validate();
     }
 }

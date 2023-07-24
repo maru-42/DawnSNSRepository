@@ -7,7 +7,7 @@
     <a href="/profile"><img src="{{ asset('/images/'.$profile->images)}}"></a>
   </div>
 
-  {!! Form::open() !!}
+  {!! Form::open(['url'=>'/profile','method'=>'post','files'=>true]) !!}
   {{ Form::token()}}
 
   @if ($errors->any())

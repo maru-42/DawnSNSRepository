@@ -51,6 +51,11 @@ class AppServiceProvider extends ServiceProvider
         $userInfo->followerCount = DB::table('follows')
             ->where('follow',Auth::id())
             ->count();
+
+        $user= DB::table('users')
+            ->find(Auth::id());
+        $userInfo->images = $user->images;
+
         return $userInfo;
     }
 }
@@ -58,4 +63,5 @@ class AppServiceProvider extends ServiceProvider
 class UserInfo{
     public $followCount;
     public $followerCount;
+    public $images;
 }
