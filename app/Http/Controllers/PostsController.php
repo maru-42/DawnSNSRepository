@@ -25,7 +25,7 @@ class PostsController extends Controller
             ->where('follows.follower',Auth::id())
             ->orWhere('posts.user_id',Auth::id())
             ->orderBy('posts.created_at','desc')
-            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at','users.id as id')
+            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at','users.id as user_id', 'posts.id as post_id')
             ->get();
 
         return view('posts.index',['posts'=>$postsList]);
@@ -48,6 +48,21 @@ class PostsController extends Controller
         return redirect('/top');
     }
 
+    public function update(Request $request)
+    {
+        //dd($request);
+        //dd($request->input('post_id'));
+        DB::table('posts')
+            ->where('id',$request->input('post_id'))
+            ->update(
+                [
+                'posts' =>$request->input('posts'),
+                'updated_at'=> new DateTime()]
+            );
+
+            return redirect('/top');
+        }
+
     public function profile(){
         $profile = DB::table('users')
             ->find(Auth::id());
@@ -55,20 +70,14 @@ class PostsController extends Controller
         ['profile'=>$profile]);
     }
 
-     public function update(Request $request){
-            $data = $request->input();
-
-            // dd($data);
-
-            // バリデーションするために追加
-            // $validator = $this->validator($data);
-
-            // if ($validator->fails()){
-            //     return redirect('profile')
-            //     ->withErrors($validator)
-            //     ->withInput();
-            // }
-
+     public function profileUpdate(Request $request){
+            $request->validate([
+            'username' => 'required|string|min:4|max:12',
+            'mail' => 'required|string|email|min:4|max:255',
+            'password' => 'alpha_num|min:4|max:12|unique:users',
+            'bio' => 'max:200',
+            'images' => 'file|image|mimes:jpg,png,bmp,gif,svg'
+            ]);
 
             // アップロードされたファイル名取得
             $filename = $request->file("images")->getClientOriginalName();
@@ -91,14 +100,14 @@ class PostsController extends Controller
             return redirect('profile');
         }
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'username' => 'required|string|min:4|max:12',
-            'mail' => 'required|string|email|min:4|max:255',
-            'password' => 'alpha_num|min:4|max:12|unique:users',
-            'bio' => 'max:200',
-            'images' => 'file|image|mines:jpg,png,bmp,gif,svg'
-        ])->validate();
-    }
+    // protected function validator(array $data)
+    // {
+    //     return Validator::make($data, [
+    //         'username' => 'required|string|min:4|max:12',
+    //         'mail' => 'required|string|email|min:4|max:255',
+    //         'password' => 'alpha_num|min:4|max:12|unique:users',
+    //         'bio' => 'max:200',
+    //         'images' => 'file|image|mines:jpg,png,bmp,gif,svg'
+    //     ])->validate();
+    // }
 }

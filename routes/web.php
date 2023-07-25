@@ -40,7 +40,7 @@ Route::post('/top','PostsController@create');
 Route::get('/profile/{userId}','UsersController@profile');
 // アコーディオンメニューのプロフィールを押して、userIdがない時にエラーが起きてしまう、userIdなしの場合は下のルーティング作って、controllerに引数なしのメソッドを作る必要がある？？
 Route::get('/profile','PostsController@profile');
-Route::post('/profile','PostsController@update');
+Route::post('/profile','PostsController@profileUpdate');
 
 Route::get('/search','UsersController@search');
 
@@ -54,3 +54,5 @@ Route::get('profile/unFollowed/{userId}','UsersController@unFollowed');
 
 Route::get('/follow-list','FollowsController@followList');
 Route::get('/follower-list','FollowsController@followerList');
+
+Route::post('/post/update','PostsController@update');
