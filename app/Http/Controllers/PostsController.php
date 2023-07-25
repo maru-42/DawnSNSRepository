@@ -63,6 +63,17 @@ class PostsController extends Controller
             return redirect('/top');
         }
 
+    public function delete(Request $request)
+    {
+        //dd($request);
+        //dd($request->input('post_id'));
+        DB::table('posts')
+            ->where('id',$request->input('post_id'))
+            ->delete();
+
+            return redirect('/top');
+        }
+
     public function profile(){
         $profile = DB::table('users')
             ->find(Auth::id());

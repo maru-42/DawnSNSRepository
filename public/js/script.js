@@ -26,7 +26,7 @@ let editModal = function (id) {
 let deleteModal = function (id) {
 
   //.editModal-投稿IDと一致するものを定数に格納
-  let checkForm = document.querySelector('.editModal-' + id);
+  let checkForm = document.querySelector('.deleteModal-' + id);
   scrollTo(0, 0);
   if (modalMenu === false) {
     checkForm.style.display = "flex";

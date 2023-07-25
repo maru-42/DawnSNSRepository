@@ -30,7 +30,6 @@
         <textarea name="posts" cols="30" rows="10"></textarea>
         <input type="hidden" name="post_id" value="{{ $post->post_id }}" />
         <div class="line-right">
-          <!-- モーダルを閉じるボタン(関数名と一致させないとモーダルが閉じません) -->
           <button type="button" class="left-button" onclick="editModal({{ $post->post_id }})">キャンセル</button>
           <!-- 送信ボタン -->
           <button type="submit" class="right-button" onclick="editModal({{ $post->post_id }})">保存</button>
@@ -41,16 +40,14 @@
 
   <div class="modal-main delete-modal deleteModal-{{ $post->post_id }}">
     <div class="modal-inner modal-content">
-      <h2>投稿削除</h2>
-      <form method="POST" enctype="multipart/form-data" action="{{ url('post/delete/') }}/{{$post->post_id}}">
+      <h2>削除</h2>
+      <form method="POST" enctype="multipart/form-data" action="{{ url('post/delete/') }}">
         @csrf
-        <textarea name="posts" cols="30" rows="10"></textarea>
-        {{ $post->post_id }}
+        <input type="hidden" name="post_id" value="{{ $post->post_id }}" />
         <div class="line-right">
-          <!-- モーダルを閉じるボタン(関数名と一致させないとモーダルが閉じません) -->
           <button type="button" class="left-button" onclick="deleteModal({{ $post->post_id }})">キャンセル</button>
           <!-- 送信ボタン -->
-          <button type="submit" class="right-button" onclick="deleteModal({{ $post->post_id }})">保存</button>
+          <button type="submit" class="right-button" onclick="deleteModal({{ $post->post_id }})">削除</button>
         </div>
       </form>
     </div>
