@@ -1,15 +1,15 @@
 @extends('layouts.login')
 
 @section('content')
-{!! Form::open(['url' => '/top']) !!}
 <div class="form-group">
+  {!! Form::open(['url' => '/top']) !!}
+  <img src="{{ asset('/images/'.$userInfo->images) }}">
   {!! Form::input('text', 'newPost', null, ['required', 'class' => 'form-control', 'placeholder' => '何をつぶやこうか...?']) !!}
+  <input type="image" src="{{ asset('/images/post.png')}}" alt="クリックで送信 " />
+  {!! Form::close() !!}
 </div>
-<button type="submit" class="btn btn-success pull-right">追加</button>
-{!! Form::close() !!}
 
 <table class='table table-hover'>
-  <!-- postscontrollerから送られてきたpostsという名前で送られた、DBから取り出した呟きs['posts'=>$postsList]を、foreachで取り出して、その一つ一つの呟きを$postという名前で使っていく -->
   @foreach ($posts as $post)
   <tr>
     <td><a href="/profile/{{ $post->user_id}}"><img src="{{ asset('/images/'.$post->images)}}"></a></td>
