@@ -22,19 +22,21 @@
     @endif
   </tr>
 
-  <div class="modal-main edit-modal editModal-{{ $post->post_id }}">
-    <div class="modal-inner modal-content">
-      <h2>投稿編集</h2>
-      <form method="POST" enctype="multipart/form-data" action="{{ url('post/update/') }}">
-        @csrf
-        <textarea name="posts" cols="30" rows="10">{{ $post->posts}}</textarea>
-        <input type="hidden" name="post_id" value="{{ $post->post_id }}" />
-        <div class="line-right">
-          <button type="button" class="left-button" onclick="editModal({{ $post->post_id }})">キャンセル</button>
-          <!-- 送信ボタン -->
-          <button type="submit" class="right-button" onclick="editModal({{ $post->post_id }})">保存</button>
-        </div>
-      </form>
+  <div class="modal-main edit-modal editModal-{{ $post->post_id }}" id="js-editModal">
+    <div class="modal-inner modal-content" id="js-editModal-content">
+      <div id="js-uchigawa">
+        <h2>投稿編集</h2>
+        <form method="POST" enctype="multipart/form-data" action="{{ url('post/update/') }}">
+          @csrf
+          <textarea name="posts" cols="30" rows="10">{{ $post->posts}}</textarea>
+          <input type="hidden" name="post_id" value="{{ $post->post_id }}" />
+          <div class="line-right">
+            <button type="button" class="left-button" onclick="editModal({{ $post->post_id }})">キャンセル</button>
+            <!-- 送信ボタン -->
+            <button type="submit" class="right-button" onclick="editModal({{ $post->post_id }})">保存</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
