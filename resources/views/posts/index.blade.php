@@ -27,7 +27,7 @@
       <h2>投稿編集</h2>
       <form method="POST" enctype="multipart/form-data" action="{{ url('post/update/') }}">
         @csrf
-        <textarea name="posts" cols="30" rows="10"></textarea>
+        <textarea name="posts" cols="30" rows="10">{{ $post->posts}}</textarea>
         <input type="hidden" name="post_id" value="{{ $post->post_id }}" />
         <div class="line-right">
           <button type="button" class="left-button" onclick="editModal({{ $post->post_id }})">キャンセル</button>
