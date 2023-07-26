@@ -94,7 +94,28 @@ class RegisterController extends Controller
             'mail' => 'required|string|email|min:4|max:255|unique:users',
             'password' => 'required|string|min:4|max:12',
             'password-confirm' => 'required|string|min:4|max:12|same:password',
-        ]);
+        ],
+        [
+            'username.required' => '名前を入力してください',
+            'username.string' => '名前を文字列で入力してください',
+            'username.min:4' => '名前を4文字以上で入力してください',
+            'username.max:12' => '名前を12文字以内で入力してください',
+            'mail.required' => 'メールアドレスを入力してください',
+            'mail.string' => 'メールアドレスを文字列で入力してください',
+            'mail.email' => 'メールアドレスを入力してください',
+            'mail.min:4' => 'メールアドレスを4文字以上で入力してください',
+            'mail.max:255' => 'メールアドレスを255文字以内で入力してください',
+            'password.required' => 'パスワードを入力してください',
+            'password.min:4' => 'パスワードを4文字以上で入力してください',
+            'password.max12' => 'パスワードを12文字以内で入力してください',
+            'password.unique:users' => 'そのパスワードは使えません。違うものを入力してください',
+            'password-confirm.required' => 'パスワード確認を入力してください',
+            'password-confirm.min:4' => 'パスワード確認を4文字以上で入力してください',
+            'password-confirm.max12' => 'パスワード確認を12文字以内で入力してください',
+            'password-confirm.unique:users' => 'そのパスワードは使えません。違うものを入力してください',
+            'password-confirm.same:password' => 'パスワードとパスワード確認は同じものにしてください',
+
+    ]);
             $this->create($data);
         $username = $data['username'];
             return view('auth.added',['username'=>$username]);

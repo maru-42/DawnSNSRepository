@@ -85,10 +85,33 @@ class PostsController extends Controller
             $request->validate([
             'username' => 'required|string|min:4|max:12',
             'mail' => 'required|string|email|min:4|max:255',
-            'password' => 'alpha_num|min:4|max:12|unique:users',
+            'password' => 'nullable|alpha_num|min:4|max:12|unique:users',
             'bio' => 'max:200',
             'images' => 'file|image|mimes:jpg,png,bmp,gif,svg'
-            ]);
+            ],
+            [
+            'username.required' => '名前を入力してください',
+            'username.string' => '名前を文字列で入力してください',
+            'username.min:4' => '名前を4文字以上で入力してください',
+            'username.max:12' => '名前を12文字以内で入力してください',
+            'mail.required' => 'メールアドレスを入力してください',
+            'mail.string' => 'メールアドレスを文字列で入力してください',
+            'mail.email' => 'メールアドレスを入力してください',
+            'mail.min:4' => 'メールアドレスを4文字以上で入力してください',
+            'mail.max:255' => 'メールアドレスを255文字以内で入力してください',
+            'password.alpha_num' => 'パスワードをアルファベットと数字で入力してください',
+            'password.min:4' => 'パスワードを4文字以上で入力してください',
+            'password.max12' => 'パスワードを12文字以内で入力してください',
+            'password.unique:users' => 'そのパスワードは使えません。違うものを入力してください',
+            'bio.max:200' => '自己紹介を200文字以内で入力してください',
+            'images.file' => 'ファイルを選択してください',
+            'images.image' => '画像を選択してください',
+            'images.mimes:jpg,png,bmp,gif,svg' => 'その画像は使えません',
+            ]
+        );
+
+        // 画像変更ありの場合
+        if($request->file("images")!=null){
 
             // アップロードされたファイル名取得
             $filename = $request->file("images")->getClientOriginalName();
@@ -96,15 +119,31 @@ class PostsController extends Controller
             // ファイル保存
             $request->images->storeAs('images',$filename,'public_uploads');
 
+            //DB更新
+            DB::table('users')
+            ->where('id',Auth::id())
+            ->update([
+                'images'=> $filename
+            ]);
+        }
+
+        // パスワード変更ありの場合
+        if($request->password!=null){
+             DB::table('users')
+            ->where('id',Auth::id())
+            ->update([
+                'password'=> bcrypt($request->password)
+            ]);
+
+
+        }
 
             DB::table('users')
             ->where('id',Auth::id())
             ->update(
                 ['username'=> $request->username,
                 'mail'=> $request->mail,
-                'password'=> bcrypt($request->password),
                 'bio'=> $request->bio,
-                'images'=> $filename,
                 'updated_at'=> new DateTime()]
             );
 

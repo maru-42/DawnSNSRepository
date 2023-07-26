@@ -16,16 +16,16 @@
 </div>
 @endif
 
-{{ Form::label('ユーザー名') }}
+{{ Form::label('username') }}
 {{ Form::text('username',null,['class' => 'input']) }}
 
-{{ Form::label('メールアドレス') }}
+{{ Form::label('e-mail') }}
 {{ Form::text('mail',null,['class' => 'input']) }}
 
-{{ Form::label('パスワード') }}
+{{ Form::label('password') }}
 {{ Form::text('password',null,['class' => 'input']) }}
 
-{{ Form::label('パスワード確認') }}
+{{ Form::label('password確認') }}
 {{ Form::text('password-confirm',null,['class' => 'input']) }}
 
 {{ Form::submit('登録') }}
