@@ -6,6 +6,16 @@
 
 <p>DAWNSNSへようこそ</p>
 
+@if ($errors->any())
+<div class="error" style="color:red">
+  <ul>
+    @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+  </ul>
+</div>
+@endif
+
 {{ Form::label('e-mail') }}
 {{ Form::text('mail',null,['class' => 'input']) }}
 {{ Form::label('password') }}
