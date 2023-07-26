@@ -34,11 +34,23 @@ let editModal = function (id) {
 //   }
 // });
 
-// 枠外クリックで閉じる
-let modals = document.querySelectorAll("[id='js-editModal']");
-modals.forEach((modal) => {
+// 編集画面枠外クリックで閉じる
+let editModals = document.querySelectorAll("[id='js-editModal']");
+editModals.forEach((modal) => {
   modal.addEventListener('click', (event) => {
-    if (event.target.closest('#js-uchigawa') === null) {
+    if (event.target.closest('#js-edit-uchigawa') === null) {
+      //alert('外側をクリックされました');
+      modal.style.display = "none";
+      modalMenu = false;
+    }
+  })
+});
+
+// 削除画面枠外クリックで閉じる
+let deleteModals = document.querySelectorAll("[id='js-deleteModal']");
+deleteModals.forEach((modal) => {
+  modal.addEventListener('click', (event) => {
+    if (event.target.closest('#js-delete-uchigawa') === null) {
       //alert('外側をクリックされました');
       modal.style.display = "none";
       modalMenu = false;

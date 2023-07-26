@@ -24,7 +24,7 @@
 
   <div class="modal-main edit-modal editModal-{{ $post->post_id }}" id="js-editModal">
     <div class="modal-inner modal-content" id="js-editModal-content">
-      <div id="js-uchigawa">
+      <div id="js-edit-uchigawa">
         <h2>投稿編集</h2>
         <form method="POST" enctype="multipart/form-data" action="{{ url('post/update/') }}">
           @csrf
@@ -40,18 +40,20 @@
     </div>
   </div>
 
-  <div class="modal-main delete-modal deleteModal-{{ $post->post_id }}">
-    <div class="modal-inner modal-content">
-      <h2>削除</h2>
-      <form method="POST" enctype="multipart/form-data" action="{{ url('post/delete/') }}">
-        @csrf
-        <input type="hidden" name="post_id" value="{{ $post->post_id }}" />
-        <div class="line-right">
-          <button type="button" class="left-button" onclick="deleteModal({{ $post->post_id }})">キャンセル</button>
-          <!-- 送信ボタン -->
-          <button type="submit" class="right-button" onclick="deleteModal({{ $post->post_id }})">削除</button>
-        </div>
-      </form>
+  <div class="modal-main delete-modal deleteModal-{{ $post->post_id }}" id="js-deleteModal">
+    <div class="modal-inner modal-content" id="js-deleteModal-content">
+      <div id="js-delete-uchigawa">
+        <h2>削除</h2>
+        <form method="POST" enctype="multipart/form-data" action="{{ url('post/delete/') }}">
+          @csrf
+          <input type="hidden" name="post_id" value="{{ $post->post_id }}" />
+          <div class="line-right">
+            <button type="button" class="left-button" onclick="deleteModal({{ $post->post_id }})">キャンセル</button>
+            <!-- 送信ボタン -->
+            <button type="submit" class="right-button" onclick="deleteModal({{ $post->post_id }})">削除</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
   @endforeach
