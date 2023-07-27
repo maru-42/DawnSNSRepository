@@ -21,7 +21,7 @@ class PostsController extends Controller
     public function index(){
        $postsList = DB::table('users')
             ->join('posts','users.id','=','posts.user_id')
-            ->join('follows','users.id','=','follows.follow')
+            ->leftJoin('follows','users.id','=','follows.follow')
             ->where('follows.follower',Auth::id())
             ->orWhere('posts.user_id',Auth::id())
             ->orderBy('posts.created_at','desc')
@@ -33,6 +33,12 @@ class PostsController extends Controller
 
      public function create(Request $request)
     {
+        $request->validate([
+            'newPost'=>'max:150'
+        ],[
+            'newPost.max'=>'150字以内で投稿してください',
+        ]);
+
         // index.blade.phpのリクエストから投稿内容を取得
         $post = $request->input('newPost');
         // 現在認証されているユーザーのIDを取得
