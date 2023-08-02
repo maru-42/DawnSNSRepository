@@ -34,6 +34,8 @@ class UsersController extends Controller
         $followNumbers = DB::table('follows')
             ->where('follower',Auth::id())
             ->pluck('follow');
+            //ログインユーザーがフォローしているユーザーのidカラムを配列で取得、
+            //取得したものはsearch.blade.phpのcontainsで、フォローするフォロー外すボタンのどちらを表示させるかの分岐に使用している
 
         // select username image from users
         $usersList = DB::table('users')
@@ -45,13 +47,13 @@ class UsersController extends Controller
         return view('users.search',['users'=>$usersList, 'followNumbers'=>$followNumbers]);
     }
 
-    public function result(){
+    public function result(Request $request){
         $followNumbers = DB::table('follows')
             ->where('follower',Auth::id())
             ->pluck('follow');
 
         // select username image from users
-        $word = $_GET['search'];
+        $word = $request->input('search');
         $usersList = DB::table('users')
             ->where('username','like','%'.$word.'%')
             // 自分をユーザー一覧に表示しないために記述
