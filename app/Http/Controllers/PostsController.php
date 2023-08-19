@@ -31,6 +31,19 @@ class PostsController extends Controller
         return view('posts.index',['posts'=>$postsList]);
     }
 
+    public function index02(){
+       $postsList = DB::table('users')
+            ->join('posts','users.id','=','posts.user_id')
+            ->leftJoin('follows','users.id','=','follows.follow')
+            // ->where('follows.follower',Auth::id())
+            ->orWhere('posts.user_id',Auth::id())
+            ->orderBy('posts.created_at','desc')
+            ->select('users.images as images','users.username as username','posts.posts as posts','posts.created_at as created_at','users.id as user_id', 'posts.id as post_id')
+            ->get();
+
+        return view('posts.index',['posts'=>$postsList]);
+    }
+
      public function create(Request $request)
     {
         $request->validate([
@@ -144,6 +157,7 @@ class PostsController extends Controller
 
         }
 
+        //画像と新しいパスワード以外の必須項目の更新
             DB::table('users')
             ->where('id',Auth::id())
             ->update(

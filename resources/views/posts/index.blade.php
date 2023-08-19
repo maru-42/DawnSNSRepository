@@ -16,6 +16,7 @@
     <td>{{ $post->username}}</td>
     <td>{{ $post->posts }}</td>
     <td>{{ $post->created_at }}</td>
+
     @if ($post->user_id==Auth::id())
     <td><img src="{{ asset('/images/edit.png')}}" id="edit-form" onclick="editModal({{$post->post_id}})"></td>
     <td><img src="{{ asset('/images/trash.png')}}" onclick="deleteModal({{$post->post_id}})"></td>

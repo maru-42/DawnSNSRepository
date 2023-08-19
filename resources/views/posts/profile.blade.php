@@ -33,14 +33,12 @@
       {{Form::email('mail', $profile->mail, ['class'=>'form-control', 'id'=>'mail', 'placeholder'=>'MailAdress'])}}
     </div>
   </div>
-
   <div class="form-group row">
     {{Form::label('oldPassword','Password')}}
     <div class="">
       {{Form::password('oldPassword', ['class'=>'form-control', 'id'=>'oldPassword','readonly', 'placeholder'=>'●●●●●●'])}}
     </div>
   </div>
-
   <div class="form-group row">
     {{Form::label('password','new Password')}}
     <div class="">
